@@ -1,16 +1,26 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Register
+{% endblock %}
 
 {% block body %}
-    {% for flashError in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
-    {% endfor %}
+	{% for flashError in app.flashes('verify_email_error') %}
+		<div class="alert alert-danger" role="alert">{{ flashError }}</div>
+	{% endfor %}
 
-    <div class ="col-md-4 mx-auto">
-    <div class="card text-white bg-dark mb-3 mx-auto" style="width: 550px">
-        <div class="card-header"><h4>Créer un compte</h4></div>
-        {{ form(registrationForm) }}
-    </div>
-    </div>
+	<div class="col-md-4 mx-auto">
+		<div class="card text-white bg-dark mb-3 mx-auto" style="width: 550px">
+			<div class="card-header">
+				<h4>Créer un compte</h4>
+			</div>
+			{{ form_start(registrationForm) }}
+			<div class="card-body">
+				<h4 class="card-title">
+					{{ form_label(registrationForm.email, 'Email') }}
+				</h4>
+				<p class="card-text">{{ form_widget(registrationForm.email) }}</p>
+			</div>
+			{{ form_end(registrationForm) }}
+		</div>
+	</div>
 {% endblock %}
