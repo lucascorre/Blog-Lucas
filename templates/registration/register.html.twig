@@ -13,14 +13,44 @@
 			<div class="card-header">
 				<h4>Créer un compte</h4>
 			</div>
+
 			{{ form_start(registrationForm) }}
+
+
 			<div class="card-body">
-				<h4 class="card-title">
+				<h5 class="card-title">
 					{{ form_label(registrationForm.email, 'Email') }}
-				</h4>
+				</h5>
 				<p class="card-text">{{ form_widget(registrationForm.email) }}</p>
+				{{ form_errors(registrationForm.email) }}
+
+				<h5 class="card-title">
+					{{ form_label(registrationForm.plainPassword, 'Password') }}
+				</h5>
+				<p class="card-text">{{ form_widget(registrationForm.plainPassword) }}</p>
+				{{ form_errors(registrationForm.plainPassword) }}
+ 
+				<h5 class="card-title">
+					{{ form_label(registrationForm.firstname, 'First Name') }}
+				</h5>
+				<p class="card-text">{{ form_widget(registrationForm.firstname) }}</p>
+
+				<h5 class="card-title">
+					{{ form_label(registrationForm.lastname, 'Last Name') }}
+				</h5>
+				<p class="card-text">{{ form_widget(registrationForm.lastname) }}</p>
+
+				<h5 class="card-title">
+					{{ form_label(registrationForm.username, 'Username') }}
+				</h5>
+				<p class="card-text">{{ form_widget(registrationForm.username) }}</p>
+
+				{{ form_widget(registrationForm.register) }}
 			</div>
+
+
 			{{ form_end(registrationForm) }}
+		
 		</div>
 	</div>
 {% endblock %}
