@@ -13,6 +13,7 @@ class DefaultController extends AbstractController
     /**
      * @Route("/", name="default")
      */
+    
     public function index(ArticleRepository $articleRepository): Response
     {
         $articles = $articleRepository->findAll();
