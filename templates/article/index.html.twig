@@ -1,7 +1,30 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Article{% endblock %}
+{% block title article.title %}
 
 {% block body %}
-    <h1>{{ article.title }}</h1>
+	<a href="/">
+		<buttontype="button" class="btn btn-success">Retour Page Accueil</button>
+	</a>
+
+
+	<div class="container mt-4">
+		<div class="row">
+			{{article.author}}
+			-
+			{{article.createdAt |date("d/m/Y")}}
+		</div>
+		<div class="row">
+			{{article.title}}
+		</div>
+		<div class="row">
+			Sous-titre
+		</div>
+		<div class="row">
+			<img src="https://d1fmx1rbmqrxrr.cloudfront.net/cnet/optim/i/edit/2019/04/eso1644bsmall__w770.jpg" class="card-img-top" alt="...">
+		</div>
+        <div class="row">
+			{{article.content}}
+		</div>
+	</div>
 {% endblock %}
