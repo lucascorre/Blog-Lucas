@@ -24,11 +24,12 @@
 									<img src="https://d1fmx1rbmqrxrr.cloudfront.net/cnet/optim/i/edit/2019/04/eso1644bsmall__w770.jpg" class="card-img-top" alt="...">
 									<div class="card-body">
 										<h5 class="card-title">{{article.title}}</h5>
+										<p class="card-text">{{article.id}}</p>
 										<p class="card-text">{{article.content}}</p>
 										<p>{{article.author}}
 											-
 											{{article.createdAt |date("d/m/Y")}}</p>
-										<a href="/article" class="btn btn-primary">Go somewhere</a>
+										<a href="{{path('article', {id: article.id})}}" class="btn btn-primary">Go somewhere</a>
 									</div>
 								</div>
 							</div>
