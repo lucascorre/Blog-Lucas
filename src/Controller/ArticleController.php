@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Article;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,6 +14,8 @@ class ArticleController extends AbstractController
      */
     public function index(): Response
     {
+        $article = $this->getDoctrine()->getRepository(Article::class);
+        dd($article);
         return $this->render('article/index.html.twig', [
             'controller_name' => 'ArticleController',
         ]);

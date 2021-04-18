@@ -18,7 +18,8 @@ class DefaultController extends AbstractController
     {
         $articles = $articleRepository->findAll();
         return $this->render('acceuil.html.twig', [
-            'articles' => $articles
+            'articles' => $articles,
+            'controller_name' => 'DefaultController',
         ]);
     }
 
@@ -28,6 +29,8 @@ class DefaultController extends AbstractController
 
     public function propos(): Response
     {
-        return $this->render('propos.html.twig', []);
+        return $this->render('propos.html.twig', [
+            'controller_name' => 'ProposController',
+        ]);
     }
 }
