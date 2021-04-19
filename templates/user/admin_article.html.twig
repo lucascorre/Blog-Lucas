@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mon Compte{% endblock %}
+{% block title %}Mon Compte
+{% endblock %}
 
 {% block body %}
 	<div class="row mt-5">
@@ -26,9 +27,27 @@
 			</div>
 		</div>
 		<div class="col-8">
-			<div class="card text-white bg-dark mb-3" style="max-width: 50rem;">
-				<div class="card-header">Gestion des Articles</div>
-				<div class="card-body">
+			<div class="container">
+				<div class="row">
+					{% for article in articles %}
+						<div class="col-md-4">
+							<div class="card mb-4">
+								<div class="card-body">
+									<img class="card-img-top" src="{{article.image}}" alt="Card image cap">
+									<h5 class="card-title">{{article.title}}</h5>
+									<p class="card-text">{{article.content}}</p>
+									<p>{{article.author}}
+										-
+										{{article.createdAt |date("d/m/Y")}}</p>
+									<a href="{{path('admin.edit.article', {id: article.id})}}" class="btn btn-info">Editer</a>
+									<a href="{{path('article', {id: article.id})}}" class="btn btn-warning">Supprimer</a>
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+				<div class="pagination justify-content-center">
+					{{ knp_pagination_render(articles) }}
 				</div>
 			</div>
 		</div>

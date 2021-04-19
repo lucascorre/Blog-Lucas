@@ -4,29 +4,30 @@
 {% endblock %}
 
 {% block body %}
-
-	<section>
-		<div class="container mt-4">
-			<form class="form-inline my-2 my-lg-0">
-				<input class="form-control mr-sm-2" type="text" placeholder="Search">
-				<button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-			</form>
+	<div class="container mt-4">
+		<form class="form-inline my-2 my-lg-0">
+			<input class="form-control mr-sm-2" type="text" placeholder="Search">
+			<button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+		</form>
+		<div class="row">
 			{% for article in articles %}
-				<div class="card mb-4">
-					<div class="card-body">
-						<img src="{{article.image}}" alt="card-img-top" style="width: 25%; height:auto;">
-						<h5 class="card-title">{{article.title}}</h5>
-						<p class="card-text">{{article.content}}</p>
-						<p>{{article.author}}
-							-
-							{{article.createdAt |date("d/m/Y")}}</p>
-						<a href="{{path('article', {id: article.id})}}" class="btn btn-primary">Go somewhere</a>
+				<div class="col-md-4">
+					<div class="card mb-4">
+						<div class="card-body">
+							<img class="card-img-top" src="{{article.image}}" alt="Card image cap">
+							<h5 class="card-title">{{article.title}}</h5>
+							<p class="card-text">{{article.content}}</p>
+							<p>{{article.author}}
+								-
+								{{article.createdAt |date("d/m/Y")}}</p>
+							<a href="{{path('article', {id: article.id})}}" class="btn btn-primary">Go somewhere</a>
+						</div>
 					</div>
 				</div>
 			{% endfor %}
-			<div class="pagination justify-content-center">
-				{{ knp_pagination_render(articles) }}
-			</div>
 		</div>
-	</section>
+		<div class="pagination justify-content-center">
+			{{ knp_pagination_render(articles) }}
+		</div>
+	</div>
 {% endblock %}
