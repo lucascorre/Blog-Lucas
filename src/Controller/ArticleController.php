@@ -3,8 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Entity\Comment;
 use App\Form\ArticleType;
+use App\Form\CommentType;
 use App\Repository\ArticleRepository;
+use App\Repository\CommentRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,7 +19,7 @@ class ArticleController extends AbstractController
     /**
      * @Route("/", name="default")
      */
-    
+
     public function index(ArticleRepository $articleRepository, PaginatorInterface $paginator, Request $request): Response
     {
         $query = $articleRepository->findAll();
@@ -25,7 +28,7 @@ class ArticleController extends AbstractController
             $query,
             $request->query->getInt('page', 1),
             3
-    );
+        );
         return $this->render('acceuil.html.twig', [
             'articles' => $article,
             'controller_name' => 'DefaultController',
@@ -35,12 +38,28 @@ class ArticleController extends AbstractController
     /**
      * @Route("/article/{id}", name="article")
      */
-    public function showArticle(ArticleRepository $articleRepository, $id): Response
+    public function showArticle(ArticleRepository $articleRepository, CommentRepository $commentRepository, Request $request, $id): Response
     {
         $article = $articleRepository->find($id);
-        //dd($article);
+        //$allComment = $commentRepository->findAll();
+        $comments = $this->getDoctrine()
+            ->getRepository(Comment::class)
+            ->findBy(['article_id' => [$article]]);
+        $addComment = new Comment();
+        $form = $this->createForm(CommentType::class, $addComment);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->addFlash('success', 'Article mis a jour');
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($addComment);
+            $entityManager->flush();
+        }
         return $this->render('article/index.html.twig', [
             'article' => $article,
+            'comment' => $comments,
+            'form' => $form->createView(),
             'controller_name' => 'ArticleController',
         ]);
     }
@@ -70,7 +89,7 @@ class ArticleController extends AbstractController
     {
         $article = $articleRepository->find($id);
         $form = $this->createForm(ArticleType::class, $article);
-        
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -82,7 +101,7 @@ class ArticleController extends AbstractController
             return $this->redirectToRoute('admin.article');
         }
 
-        return $this->render('user/edit_article.html.twig', [ 
+        return $this->render('user/edit_article.html.twig', [
             'articles' => $article,
             'form' => $form->createView()
         ]);
@@ -107,7 +126,7 @@ class ArticleController extends AbstractController
             return $this->redirectToRoute('admin.article');
         }
 
-        return $this->render('user/edit_article.html.twig', [ 
+        return $this->render('user/edit_article.html.twig', [
             'articles' => $article,
             'form' => $form->createView()
         ]);
@@ -117,13 +136,13 @@ class ArticleController extends AbstractController
      * @Route("/user/admin/delete/article/{id}", name="admin.delete.article")
      */
     public function deleteArticle(ArticleRepository $articleRepository, PaginatorInterface $paginator, Request $request, $id)
-    {   
+    {
         $oneArticle = $articleRepository->find($id);
 
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->remove($oneArticle);
         $entityManager->flush();
-        
+
         return $this->redirectToRoute('admin.article');
     }
 }

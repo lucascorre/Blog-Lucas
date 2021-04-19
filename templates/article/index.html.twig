@@ -2,11 +2,12 @@
 
 {% block title article.title %}
 
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
 {% block body %}
 	<a href="/">
 		<buttontype="button" class="btn btn-success">Retour Page Accueil</button>
 	</a>
-
 
 	<div class="col-md-4 mx-auto">
 		<div class="container mt-4">
@@ -26,6 +27,24 @@
 					</div>
 					<div class="row">
 						{{article.content}}
+					</div>
+				</div>
+			</div>
+			<div class="card bg-dark">
+				<div class="card-body mx-auto">
+					<div class="row">
+						{{ form_start(form) }}
+						<div class="row">{{ form_label(form.comment) }}</div>
+						<div class="row">{{ form_widget(form.comment) }}</div>
+						<div class="form-group mt-4 text-center">
+							<button class="btn btn-success">Envoyer</button>
+						</div>
+						{{ form_end(form) }}
+					</div>
+					<div class="row">
+						{% for comment in comments %}
+							{{comment.comment}}
+						{% endfor %}
 					</div>
 				</div>
 			</div>

@@ -44,12 +44,12 @@ class AppFixtures extends Fixture
         $manager->persist($admin);
         $manager->flush();
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 50; $i++) {
             $article = new Article();
             $article->setTitle('Titre')
-                    ->setContent('Lorem Ipsum')
-                    ->setAuthor('Lucas Corre')
-                    ->setCreatedAt(new \DateTime());
+                    ->setContent('oskour')
+                    ->setAuthor($faker->firstName)
+                    ->setCreatedAt($faker->dateTime);
 
             $manager->persist($article);
             $manager->flush();
