@@ -8,23 +8,27 @@
 	</a>
 
 
-	<div class="container mt-4">
-		<div class="row">
-			{{article.author}}
-			-
-			{{article.createdAt |date("d/m/Y")}}
-		</div>
-		<div class="row">
-			{{article.title}}
-		</div>
-		<div class="row">
-			Sous-titre
-		</div>
-		<div class="row">
-			<img src="..." class="card-img-top" alt="...">
-		</div>
-		<div class="row">
-			{{article.content}}
+	<div class="col-md-4 mx-auto">
+		<div class="container mt-4">
+			<div class="card bg-dark">
+				<img class="card-img-top" src="{{article.image}}" alt="Card image cap">
+				<div class="card-header">
+					{{article.author}}
+					-
+					{{article.createdAt |date("d/m/Y")}}
+				</div>
+				<div class="card-body">
+					<div class="row">
+						{{article.title}}
+					</div>
+					<div class="row">
+						Sous-titre
+					</div>
+					<div class="row">
+						{{article.content}}
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 {% endblock %}

@@ -56,7 +56,7 @@ class ArticleController extends AbstractController
             $query,
             $request->query->getInt('page', 1),
             3
-    );
+        );
         return $this->render('user/admin_article.html.twig', [
             'articles' => $article,
             'controller_name' => 'DefaultController',
@@ -78,20 +78,24 @@ class ArticleController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($article);
             $entityManager->flush();
+
+            return $this->redirectToRoute('admin.article');
         }
 
         return $this->render('user/edit_article.html.twig', [ 
-            'article' => $article,
+            'articles' => $article,
             'form' => $form->createView()
         ]);
     }
+
     /**
      * @Route("/user/admin/new/article", name="admin.new.article")
      */
-    public function newArticle(ArticleRepository $articleRepository, Request $request)
+    public function newArticle(Request $request)
     {
         $article = new Article();
-        $form = $this->createForm(ArticleType::class, $articleRepository);
+        $form = $this->createForm(ArticleType::class, $article);
+        $article->setCreatedAt(new \DateTime());
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -99,11 +103,27 @@ class ArticleController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($article);
             $entityManager->flush();
+
+            return $this->redirectToRoute('admin.article');
         }
 
         return $this->render('user/edit_article.html.twig', [ 
-            'article' => $article,
+            'articles' => $article,
             'form' => $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/user/admin/delete/article/{id}", name="admin.delete.article")
+     */
+    public function deleteArticle(ArticleRepository $articleRepository, PaginatorInterface $paginator, Request $request, $id)
+    {   
+        $oneArticle = $articleRepository->find($id);
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($oneArticle);
+        $entityManager->flush();
+        
+        return $this->redirectToRoute('admin.article');
     }
 }
