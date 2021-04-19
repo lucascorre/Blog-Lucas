@@ -19,14 +19,15 @@ class DefaultController extends AbstractController
     
     public function index(ArticleRepository $articleRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        $query = ;
+        $query = $articleRepository->findAll();
 
-        $articles = $paginator->paginate($this->$articleRepository->findAll(),
-        $request->query->getInt('page', 1),
-        3
+        $article = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            3
     );
         return $this->render('acceuil.html.twig', [
-            'articles' => $articles,
+            'articles' => $article,
             'controller_name' => 'DefaultController',
         ]);
     }

@@ -37,6 +37,11 @@ class Article
      */
     private $createdAt;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $image;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -86,6 +91,18 @@ class Article
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = new \DateTime();
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }
