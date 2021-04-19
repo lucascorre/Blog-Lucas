@@ -1,36 +1,40 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark position-sticky">
-  <a class="navbar-brand" href="/">Lucas Blog</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+	<a class="navbar-brand" href="/">Lucas Blog</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
 
-  <div class="collapse navbar-collapse position-sticky" id="navbarColor02">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item {% if controller_name is defined and controller_name == 'DefaultController' %}active{% endif %}">
-        <a class="nav-link" href="/">Accueil
-          <span class="sr-only">(current)</span>
-        </a>
+	<div class="collapse navbar-collapse position-sticky" id="navbarColor02">
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item {% if controller_name is defined and controller_name == 'DefaultController' %}active{% endif %}">
+				<a class="nav-link" href="/">Accueil
+					<span class="sr-only">(current)</span>
+				</a>
+			</li>
+			<li class="nav-item {% if controller_name is defined and controller_name == 'ProposController' %}active{% endif %}">
+				<a class="nav-link" href="/propos">A propos</a>
+			</li>
+			<li class="nav-item {% if controller_name is defined and controller_name == 'ContactController' %}active{% endif %}">
+				<a class="nav-link" href="/contact">Contact</a>
+			</li>
+			<li class="nav-item {% if controller_name is defined and controller_name == 'RegistrationController' %}active{% endif %}">
+				<a class="nav-link" href="/register">Créer un compte</a>
+			</li>
+		</ul>
+		<ul class="right navbar-nav">
+			{% if app.user %}
+			<li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button">{{app.user.lastname}} {{app.user.firstname}}</a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="/user/acceuil">Mon Compte</a>
+          <a class="dropdown-item" href="{{ path('app_logout') }}">Deconnexion</a>
+        </div>
       </li>
-      <li class="nav-item {% if controller_name is defined and controller_name == 'ProposController' %}active{% endif %}">
-        <a class="nav-link" href="/propos">A propos</a>
-      </li>
-      <li class="nav-item {% if controller_name is defined and controller_name == 'ContactController' %}active{% endif %}">
-        <a class="nav-link" href="/contact">Contact</a>
-      </li>
-      <li class="nav-item {% if controller_name is defined and controller_name == 'RegistrationController' %}active{% endif %}">
-        <a class="nav-link" href="/register">Créer un compte</a>
-      </li>
-    </ul>
-    <ul class="right navbar-nav">
-      {% if app.user %}
-        <li class="nav-item">
-          <a class="nav-link" href="{{ path('app_logout') }}">Deconnexion<a/>
-        </li>
-      {% else %}      
-        <li class="nav-item {% if controller_name is defined and controller_name == 'SecurityController' %}active{% endif %}">
-          <a class="nav-link" href="{{ path('app_login') }}">Se connecter<a/>
-        </li>
-      {% endif %}
-    </ul>
-  </div>
+			{% else %}
+			  <li class="nav-item {% if controller_name is defined and controller_name == 'SecurityController' %}active{% endif %}">
+					<a class="nav-link" href="{{ path('app_login') }}">Se connecter<a/>
+				</li>
+			{% endif %}
+		</ul>
+	</div>
 </nav>

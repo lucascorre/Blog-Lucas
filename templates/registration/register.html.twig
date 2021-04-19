@@ -18,7 +18,6 @@
 
 			{{ form_start(registrationForm) }}
 
-
 			<div class="card-body">
 				<h5 class="card-title">
 					{{ form_label(registrationForm.email, 'Email') }}
@@ -46,13 +45,11 @@
 					{{ form_label(registrationForm.username, 'Username') }}
 				</h5>
 				<p class="card-text">{{ form_widget(registrationForm.username) }}</p>
-
+				
 				{{ form_widget(registrationForm.register) }}
 			</div>
 
-
 			{{ form_end(registrationForm) }}
-		
 		</div>
 	</div>
 {% endblock %}
