@@ -42,6 +42,16 @@ class Article
      */
     private $image;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $category;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $summary;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -103,6 +113,30 @@ class Article
     public function setImage(string $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getCategory(): ?string
+    {
+        return $this->category;
+    }
+
+    public function setCategory(string $category): self
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    public function getSummary(): ?string
+    {
+        return $this->summary;
+    }
+
+    public function setSummary(string $summary): self
+    {
+        $this->summary = $summary;
 
         return $this;
     }
