@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mon Compte
+{% block title %}Gestion des Articles
 {% endblock %}
 
 {% block body %}
@@ -27,6 +27,9 @@
 			</div>
 		</div>
 		<div class="col-8">
+			<a href="/user/admin/new/article">
+				<buttontype="button" class="btn btn-lg btn-success">Ajouter un Article</button>
+			</a>
 			<div class="container">
 				<div class="row">
 					{% for article in articles %}

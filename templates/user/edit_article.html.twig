@@ -1,8 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mon Compte{% endblock %}
+{% block title %}Edition de L'article{% endblock %}
+
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
 
 {% block body %}
+<div class="container mt-4">
 	{{ form_start(form) }}
+        {{form_widget(form)}}
+        <button class="btn btn-primary">Sauvegarder</button>
     {{ form_end(form) }}
+</div>
 {% endblock %}
