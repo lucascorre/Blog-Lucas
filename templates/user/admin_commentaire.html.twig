@@ -29,6 +29,11 @@
 			<div class="card text-white bg-dark mb-3" style="max-width: 50rem;">
 				<div class="card-header">Gestion des Commentaires</div>
 				<div class="card-body">
+					{% for comment in comment %}
+						<div class="row">
+							{{comment.comment}}
+						</div>
+					{% endfor %}
 				</div>
 			</div>
 		</div>

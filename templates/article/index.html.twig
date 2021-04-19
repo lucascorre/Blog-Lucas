@@ -42,8 +42,10 @@
 						{{ form_end(form) }}
 					</div>
 					<div class="row">
-						{% for comment in comments %}
-							{{comment.comment}}
+						{% for comment in comment %}
+							<div class="row">
+								{{comment.comment}}
+							</div>
 						{% endfor %}
 					</div>
 				</div>

@@ -28,14 +28,4 @@ class UserController extends AbstractController
             'controller_name' => 'UserController',
         ]);
     }
-   
-    /**
-     * @Route("/user/admin/commentaire", name="admin.commentaire")
-     */
-    public function gestionCommentaire(): Response
-    {
-        return $this->render('user/admin_commentaire.html.twig', [
-            'controller_name' => 'UserController',
-        ]);
-    }
 }

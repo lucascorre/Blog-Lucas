@@ -21,6 +21,8 @@ class AppFixtures extends Fixture
     {
         $faker = Factory::create('fr_FR');
         $faker->seed(0);
+
+        for ($i = 0; $i < 5; $i++) {
         $user = new User();
         $user 
             ->setEmail('user@ex.com')
@@ -31,10 +33,12 @@ class AppFixtures extends Fixture
         ;
         $manager->persist($user);
         $manager->flush();
+        }
 
+        for ($i = 0; $i < 5; $i++) {
         $admin = new User();
         $admin 
-            ->setEmail('admin@ex.com')
+            ->setEmail($faker->email)
             ->setPassword($this->encoder->encodePassword($admin, 'admin'))
             ->setFirstname($faker->firstName)
             ->setLastname($faker->lastName)
@@ -43,11 +47,12 @@ class AppFixtures extends Fixture
         ;
         $manager->persist($admin);
         $manager->flush();
+        }
 
         for ($i = 0; $i < 50; $i++) {
             $article = new Article();
-            $article->setTitle('Titre')
-                    ->setContent('oskour')
+            $article->setTitle('Lorem Ipsum')
+                    ->setContent($faker->realText())
                     ->setAuthor($faker->firstName)
                     ->setCreatedAt($faker->dateTime);
 

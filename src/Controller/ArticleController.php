@@ -41,10 +41,7 @@ class ArticleController extends AbstractController
     public function showArticle(ArticleRepository $articleRepository, CommentRepository $commentRepository, Request $request, $id): Response
     {
         $article = $articleRepository->find($id);
-        //$allComment = $commentRepository->findAll();
-        $comments = $this->getDoctrine()
-            ->getRepository(Comment::class)
-            ->findBy(['article_id' => [$article]]);
+        $allComment = $commentRepository->findAll();
         $addComment = new Comment();
         $form = $this->createForm(CommentType::class, $addComment);
 
@@ -58,7 +55,7 @@ class ArticleController extends AbstractController
         }
         return $this->render('article/index.html.twig', [
             'article' => $article,
-            'comment' => $comments,
+            'comment' => $allComment,
             'form' => $form->createView(),
             'controller_name' => 'ArticleController',
         ]);
@@ -144,5 +141,18 @@ class ArticleController extends AbstractController
         $entityManager->flush();
 
         return $this->redirectToRoute('admin.article');
+    }
+
+    /**
+     * @Route("/user/admin/commentaire", name="admin.commentaire")
+     */
+    public function gestionCommentaire(CommentRepository $commentRepository): Response
+    {
+        $allComment = $commentRepository->findAll();
+
+        return $this->render('user/admin_commentaire.html.twig', [
+            'controller_name' => 'UserController',
+            'comment' => $allComment,
+        ]);
     }
 }
