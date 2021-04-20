@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class ArticleType extends AbstractType
@@ -16,7 +17,16 @@ class ArticleType extends AbstractType
         $builder
             ->add('author',TextType::class)
             ->add('title',TextType::class)
-            ->add('category', TextType::class)
+            ->add('category',ChoiceType::class,
+            [
+                'choices' =>
+                [
+                    'Muscle Car' => 'Muscle Car',
+                    'Super Car' => 'Super Car',
+                    'Electric Car' => 'Electric Car',
+                    'Sport' => 'Sport',
+                ]
+            ])
             ->add('content', TextareaType::class)
             ->add('summary', TextareaType::class)
             ->add('image', TextareaType::class)
