@@ -73,7 +73,7 @@ class ArticleController extends AbstractController
             $request->query->getInt('page', 1),
             3
         );
-        return $this->render('user/admin_article.html.twig', [
+        return $this->render('admin/admin_article.html.twig', [
             'articles' => $article,
             'controller_name' => 'DefaultController',
         ]);
@@ -98,7 +98,7 @@ class ArticleController extends AbstractController
             return $this->redirectToRoute('admin.article');
         }
 
-        return $this->render('user/edit_article.html.twig', [
+        return $this->render('admin/edit_article.html.twig', [
             'articles' => $article,
             'form' => $form->createView()
         ]);
@@ -123,7 +123,7 @@ class ArticleController extends AbstractController
             return $this->redirectToRoute('admin.article');
         }
 
-        return $this->render('user/edit_article.html.twig', [
+        return $this->render('admin/edit_article.html.twig', [
             'articles' => $article,
             'form' => $form->createView()
         ]);
@@ -150,7 +150,7 @@ class ArticleController extends AbstractController
     {
         $allComment = $commentRepository->findAll();
 
-        return $this->render('user/admin_commentaire.html.twig', [
+        return $this->render('admin/admin_commentaire.html.twig', [
             'controller_name' => 'UserController',
             'comment' => $allComment,
         ]);

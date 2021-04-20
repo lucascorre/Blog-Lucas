@@ -1,5 +1,5 @@
 {% if app.user and is_granted('ROLE_ADMIN') %}
-    {% include "user/admin.html.twig" %}
+    {% include "admin/admin.html.twig" %}
 {% else %}
     {% include "user/user.html.twig" %}
 {% endif %}
