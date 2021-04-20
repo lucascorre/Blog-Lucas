@@ -22,10 +22,31 @@ class AppFixtures extends Fixture
         $faker = Factory::create('fr_FR');
         $faker->seed(0);
 
+        $userAdmin = new User();
+        $userAdmin->setEmail('admin@ex.com');
+        $userAdmin->setPassword($this->encoder->encodePassword($userAdmin, 'admin'));
+        $userAdmin->setFirstname($faker->firstName);
+        $userAdmin->setLastname($faker->lastName);
+        $userAdmin->setUsername($faker->firstName);
+        $userAdmin->setRoles(['ROLE_ADMIN']);
+
+        $manager->persist($userAdmin);
+        $manager->flush();
+
+        $userUser = new User();
+        $userUser->setEmail('user@ex.com');
+        $userUser->setPassword($this->encoder->encodePassword($userUser, 'user'));
+        $userUser->setFirstname($faker->firstName);
+        $userUser->setLastname($faker->lastName);
+        $userUser->setUsername($faker->firstName);
+
+        $manager->persist($userUser);
+        $manager->flush();
+
         for ($i = 0; $i < 5; $i++) {
         $user = new User();
         $user 
-            ->setEmail('user@ex.com')
+            ->setEmail($faker->email)
             ->setPassword($this->encoder->encodePassword($user, 'user'))
             ->setFirstname($faker->firstName)
             ->setLastname($faker->lastName)
@@ -52,9 +73,12 @@ class AppFixtures extends Fixture
         for ($i = 0; $i < 50; $i++) {
             $article = new Article();
             $article->setTitle('Lorem Ipsum')
-                    ->setContent($faker->realText())
                     ->setAuthor($faker->firstName)
-                    ->setCreatedAt($faker->dateTime);
+                    ->setContent($faker->text($maxNbChars = 255))
+                    ->setSummary($faker->sentence(6, true))
+                    ->setImage($faker->imageUrl($width = 640, $height = 480))
+                    ->setCategory($faker->numberBetween($min = 0, $max = 5))
+                    ->setCreatedAt($faker->dateTime($max = 'now', $timezone = null));
 
             $manager->persist($article);
             $manager->flush();
