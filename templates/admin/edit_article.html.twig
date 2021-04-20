@@ -1,15 +1,34 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edition de L'article{% endblock %}
+{% block title %}Edition de L'article
+{% endblock %}
 
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
 
 {% block body %}
-<div class="container mt-4">
-	{{ form_start(form) }}
-        {{form_widget(form)}}
-        <button class="btn btn-primary">Sauvegarder</button>
-    {{ form_end(form) }}
-        <a href="/user/admin/article" class="btn btn-warning mt-3">Annuler</a>
-</div>
+	<div class="container mt-4">
+		{{ form_start(form) }}
+
+		{{form_label(form.author)}}
+		{{form_widget(form.author)}}
+
+		{{form_label(form.title)}}
+		{{form_widget(form.title)}}
+
+		{{form_label(form.category)}}
+		{{form_widget(form.category)}}
+
+		{{form_label(form.summary)}}
+		{{form_widget(form.summary)}}
+
+		{{form_label(form.content)}}
+		{{form_widget(form.content)}}
+
+		{{ form_label(form.image, 'Lien URL de la Photo') }}
+		{{form_widget(form.image)}}
+
+		<button class="btn btn-primary mt-3">Sauvegarder</button>
+		{{ form_end(form) }}
+		<a href="/user/admin/article" class="btn btn-warning mt-3">Annuler</a>
+	</div>
 {% endblock %}
