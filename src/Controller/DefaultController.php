@@ -11,7 +11,6 @@ class DefaultController extends AbstractController
     /**
      * @Route ("/propos", name="propos")
      */
-
     public function propos(): Response
     {
         return $this->render('propos.html.twig', [

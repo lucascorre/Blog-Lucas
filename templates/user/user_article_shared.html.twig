@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mon Compte{% endblock %}
+{% block title %}Article Shared
+{% endblock %}
 
 {% block body %}
 	<div class="row mt-5">
@@ -22,12 +23,12 @@
 							<buttontype="button" class="btn btn-lg btn-success">Artciles Aimés</button>
 						</a>
 					</div>
-                    <div class="text-center mt-5 mb-5">
+					<div class="text-center mt-5 mb-5">
 						<a href="/user/article/shared">
 							<buttontype="button" class="btn btn-lg btn-success">Articles Partagés</button>
 						</a>
 					</div>
-                    <div class="text-center mt-5 mb-5">
+					<div class="text-center mt-5 mb-5">
 						<a href="/user/article/commented">
 							<buttontype="button" class="btn btn-lg btn-success">Articles Commentés</button>
 						</a>
@@ -35,26 +36,11 @@
 				</div>
 			</div>
 		</div>
-		<div class="container">
-			<div class="row">
-				{% for article in articles %}
-					<div class="col-md-4">
-						<div class="card mb-4">
-							<img class="card-img-top" src="{{article.image}}" alt="Card image cap">
-							<div class="card-body">
-								<h5 class="card-title">{{article.title}}</h5>
-								<p class="card-text">{{ article.getSummary()|slice(0, 50) }}</p>
-								<p>{{article.author}}
-									-
-									{{article.createdAt |date("d/m/Y")}}</p>
-								<a href="{{path('article', {id: article.id})}}" class="btn btn-primary">Go somewhere</a>
-							</div>
-						</div>
-					</div>
-				{% endfor %}
-			</div>
-			<div class="pagination justify-content-center">
-				{{ knp_pagination_render(articles) }}
+        <div class="container">
+			<div class="card text-white bg-dark mb-3" style="max-width: 50rem;">
+				<div class="card-header">Les articles que vous avez partagés</div>
+				<div class="card-body">
+				</div>
 			</div>
 		</div>
 	</div>
