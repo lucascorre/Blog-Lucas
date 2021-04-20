@@ -77,7 +77,7 @@ class AppFixtures extends Fixture
                     ->setContent($faker->text($maxNbChars = 255))
                     ->setSummary($faker->sentence(6, true))
                     ->setImage($faker->imageUrl($width = 640, $height = 480))
-                    ->setCategory($faker->numberBetween($min = 0, $max = 5))
+                    ->setCategory($faker->word)
                     ->setCreatedAt($faker->dateTime($max = 'now', $timezone = null));
 
             $manager->persist($article);
