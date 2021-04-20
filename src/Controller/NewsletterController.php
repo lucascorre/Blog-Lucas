@@ -21,10 +21,12 @@ class NewsletterController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->addFlash('success', 'Votre message a bien été envoyé');
+            $this->addFlash('success', 'Vous êtes maitenant abonné a notre Newsletter');
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($newsletter);
             $entityManager->flush();
+
+            return $this->redirectToRoute('newsletter');
         }
 
         return $this->render('newsletter/index.html.twig', [

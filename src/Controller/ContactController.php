@@ -22,10 +22,12 @@ class ContactController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->addFlash('success', 'Votre message a bien été envoyé');
+            $this->addFlash('success', 'Votre message à bien été envoyé, votre réponse se fera dans les meilleurs délais.');
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($contact);
             $entityManager->flush();
+
+            return $this->redirectToRoute('contact');
         }
 
         return $this->render('contact.html.twig', [

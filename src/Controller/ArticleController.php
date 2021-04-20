@@ -48,7 +48,6 @@ class ArticleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->addFlash('success', 'Article mis a jour');
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($addComment);
             $entityManager->flush();
@@ -90,7 +89,9 @@ class ArticleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $this->addFlash('success', 'Article mis a jour');
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($article);
             $entityManager->flush();
@@ -139,6 +140,8 @@ class ArticleController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->remove($oneArticle);
         $entityManager->flush();
+
+        $this->addFlash('delete', 'Article Supprimé');
 
         return $this->redirectToRoute('admin.article');
     }

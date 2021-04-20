@@ -1,10 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Newsletter{% endblock %}
+{% block title %}Newsletter
+{% endblock %}
 
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
 
 {% block body %}
+	{% for message in app.flashes('success') %}
+		<div class="alert alert-success">
+			{{ message }}
+		</div>
+	{% endfor %}
 
 	<a href="/">
 		<buttontype="button" class="btn btn-success">Retour Page Accueil</button>
@@ -28,7 +34,7 @@
 				<div class="form-group mt-4 text-center">
 					<button class="btn btn-success">Souscrire</button>
 				</div>
-				{{ form_end(form) }} 
+				{{ form_end(form) }}
 			</div>
 		</div>
 

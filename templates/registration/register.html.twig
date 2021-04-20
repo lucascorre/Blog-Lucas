@@ -6,8 +6,15 @@
 {% form_theme registrationForm 'bootstrap_4_layout.html.twig' %}
 
 {% block body %}
+
 	{% for flashError in app.flashes('verify_email_error') %}
 		<div class="alert alert-danger" role="alert">{{ flashError }}</div>
+	{% endfor %}
+
+	{% for message in app.flashes('success') %}
+		<div class="alert alert-success">
+			{{ message }}
+		</div>
 	{% endfor %}
 
 	<div class="col-md-4 mx-auto mt-5">
@@ -30,7 +37,7 @@
 				</h5>
 				<p class="card-text">{{ form_widget(registrationForm.plainPassword) }}</p>
 				{{ form_errors(registrationForm.plainPassword) }}
- 
+
 				<h5 class="card-title">
 					{{ form_label(registrationForm.firstname, 'First Name') }}
 				</h5>
@@ -45,7 +52,7 @@
 					{{ form_label(registrationForm.username, 'Username') }}
 				</h5>
 				<p class="card-text">{{ form_widget(registrationForm.username) }}</p>
-				
+
 				{{ form_widget(registrationForm.register) }}
 			</div>
 

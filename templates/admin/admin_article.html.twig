@@ -3,7 +3,20 @@
 {% block title %}Gestion des Articles
 {% endblock %}
 
+
 {% block body %}
+
+	{% for message in app.flashes('success') %}
+		<div class="alert alert-success">
+			{{ message }}
+		</div>
+	{% endfor %}
+	{% for message in app.flashes('delete') %}
+		<div class="alert alert-warning">
+			{{ message }}
+		</div>
+	{% endfor %}
+
 	<div class="row mt-5">
 		<div class="col-4">
 			<div class="card text-white bg-dark mb-3" style="max-width: 20rem;">

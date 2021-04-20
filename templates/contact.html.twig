@@ -6,6 +6,12 @@
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
 
 {% block body %}
+	{% for message in app.flashes('success') %}
+		<div class="alert alert-success">
+			{{ message }}
+		</div>
+	{% endfor %}
+
 	<div class="row mt-5 ml-5">
 		<a href="/">
 			<buttontype="button" class="btn btn-success">Retour Page Accueil</button>
